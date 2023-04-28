@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import FormComponent from "./components/FormComponent";
 import AnswerComponent from "./components/AnswerComponent";
@@ -7,7 +6,6 @@ import { Configuration, OpenAIApi } from "openai";
 
 function App() {
   const [storedValues, setStoredValues] = useState<any>([]);
-  console.log(process.env.REACT_APP_API_KEY);
 
   const configuration = new Configuration({
     organization: "org-JbLj3cYfxKIxHNxVNMMvEh2L",
@@ -19,7 +17,7 @@ function App() {
 
   const generateResponse = async (newQuestion: any, setNewQuestion: any) => {
     let options = {
-      model: "gpt-3.5-turbo",
+      model: "text-davinci-003",
       temperature: 0,
       max_tokens: 100,
       top_p: 1,
@@ -34,8 +32,7 @@ function App() {
     };
 
     const response = await openai.createCompletion(completeOptions);
-    console.log(response);
-    console.log("123=======" + response.data.choices[0].text);
+    console.log("Response data=======" + response.data.choices[0].text);
     if (response.data.choices) {
       setStoredValues([
         {

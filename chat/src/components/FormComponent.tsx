@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-const FormComponent = ({ generateResponse }:any) => {
+const FormComponent = ({ generateResponse }: any) => {
   const [newQuestion, setNewQuestion] = useState<string>("");
-  const btnChangeHandler = (e:any) => {
-    generateResponse(newQuestion, setNewQuestion)
+  const btnChangeHandler = (e: any) => {
+    generateResponse(newQuestion, setNewQuestion);
   };
   return (
     <div className="form-section">
@@ -22,4 +22,3 @@ const FormComponent = ({ generateResponse }:any) => {
 };
 
 export default FormComponent;
-fdhgfhfgdhdfg
