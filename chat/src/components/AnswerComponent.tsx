@@ -1,23 +1,33 @@
+import {
+  AnswerContainer,
+  AnswerSection,
+  AnswerSectionAnswer,
+  AnswerSectionQuestion,
+  CopyIcon,
+  HrLine,
+  IconHover,
+} from "./StyledComponents/StyledComponent";
+
 const AnswerComponent = ({ storedValues }: any) => {
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
   };
   return (
     <>
-      <hr className="hr-line" />
-      <div className="answer-container">
-        {storedValues.map((value:any, index:number) => {
+      <HrLine />
+      <AnswerContainer>
+        {storedValues.map((value: any, index: number) => {
           return (
-            <div className="answer-section" key={index}>
-              <p className="question">{value.question}</p>
-              <p className="answer">{value.answer}</p>
-              <div className="copy-icon" onClick={() => copyText(value.answer)}>
-                <i className="fa-solid fa-copy"></i>
-              </div>
-            </div>
+            <AnswerSection key={index}>
+              <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
+              <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
+              <CopyIcon onClick={() => copyText(value.answer)}>
+                <IconHover></IconHover>
+              </CopyIcon>
+            </AnswerSection>
           );
         })}
-      </div>
+      </AnswerContainer>
     </>
   );
 };

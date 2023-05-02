@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import "./App.css";
 import FormComponent from "./components/FormComponent";
 import AnswerComponent from "./components/AnswerComponent";
 import { Configuration, OpenAIApi } from "openai";
+import { Header } from "./components/StyledComponents/StyledComponent";
+import GlobalStyleComponent from "./components/StyledComponents/GlobalStyleComponent";
 
 function App() {
   const [storedValues, setStoredValues] = useState<any>([]);
 
   const configuration = new Configuration({
-    organization: "org-JbLj3cYfxKIxHNxVNMMvEh2L",
+    organization: process.env.REACT_APP_API_ORGANIZATION,
     apiKey: process.env.REACT_APP_API_KEY,
   });
 
@@ -32,7 +33,7 @@ function App() {
     };
 
     const response = await openai.createCompletion(completeOptions);
-    console.log("Response data=======" + response.data.choices[0].text);
+    console.log("Response data=====" + response.data.choices[0].text);
     if (response.data.choices) {
       setStoredValues([
         {
@@ -47,10 +48,11 @@ function App() {
 
   return (
     <div>
-      <div className="header-section">
+      <Header>
+        <GlobalStyleComponent />
         <h1>ChatGPT maib</h1>
-        <p></p>
-      </div>
+        <p>Internal chat</p>
+      </Header>
       <FormComponent generateResponse={generateResponse} />
       <AnswerComponent storedValues={storedValues} />
     </div>

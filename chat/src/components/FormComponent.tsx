@@ -1,23 +1,36 @@
 import React, { useState } from "react";
+import {
+  BTN,
+  FormControl,
+  FormSection,
+  TextArea,
+} from "./StyledComponents/StyledComponent";
+import { Input, InputProps, TextareaAutosize } from "@mui/base";
+import InputComponent from "./InputComponent";
 
 const FormComponent = ({ generateResponse }: any) => {
   const [newQuestion, setNewQuestion] = useState<string>("");
   const btnChangeHandler = (e: any) => {
     generateResponse(newQuestion, setNewQuestion);
   };
+
   return (
-    <div className="form-section">
-      <textarea
+    <>
+      {/* <div className="form-section"> */}
+      <FormControl>
+      {/* <InputComponent /> */}
+        <textarea
         rows={5}
-        className="form-control"
         placeholder="Întreaba orice..."
         value={newQuestion}
         onChange={(e) => setNewQuestion(e.target.value)}
       ></textarea>
-      <button className="btn" onClick={btnChangeHandler}>
+      </FormControl>
+      <BTN  onClick={btnChangeHandler}>
         Trimite
-      </button>
-    </div>
+      </BTN>
+      {/* </div> */}
+    </>
   );
 };
 
