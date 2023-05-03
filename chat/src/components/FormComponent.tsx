@@ -5,31 +5,34 @@ import {
   FormSection,
   TextArea,
 } from "./StyledComponents/StyledComponent";
-import { Input, InputProps, TextareaAutosize } from "@mui/base";
+import { Button, Input, InputProps, TextareaAutosize } from "@mui/base";
 import InputComponent from "./InputComponent";
 
 const FormComponent = ({ generateResponse }: any) => {
+
   const [newQuestion, setNewQuestion] = useState<string>("");
+  
   const btnChangeHandler = (e: any) => {
     generateResponse(newQuestion, setNewQuestion);
+    console.log(newQuestion)
   };
 
   return (
     <>
-      {/* <div className="form-section"> */}
       <FormControl>
-      {/* <InputComponent /> */}
-        <textarea
-        rows={5}
-        placeholder="Întreaba orice..."
-        value={newQuestion}
-        onChange={(e) => setNewQuestion(e.target.value)}
-      ></textarea>
+        <InputComponent
+          placeholder="Întreaba orice..."
+          value={newQuestion}
+          onChange={(e: any) => setNewQuestion(e.target.value)}
+        />
+        {/* <textarea
+          rows={5}
+          placeholder="Întreaba orice..."
+          value={newQuestion}
+          onChange={(e) => setNewQuestion(e.target.value)}
+        ></textarea> */}
       </FormControl>
-      <BTN  onClick={btnChangeHandler}>
-        Trimite
-      </BTN>
-      {/* </div> */}
+      <BTN onClick={btnChangeHandler}>Trimite</BTN>
     </>
   );
 };

@@ -105,12 +105,13 @@ const CustomInput = React.forwardRef(function CustomInput(
   );
 });
 
-export default function InputComponent() {
+export default function InputComponent(props: any) {
   return (
     <CustomInput
-      aria-label="Demo input"
+      aria-label="input"
       multiline
-      placeholder="Type something…"
+      placeholder={props.placeholder}
+      value={props.newQuestion}
     />
   );
 }
