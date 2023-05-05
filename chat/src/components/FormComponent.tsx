@@ -7,30 +7,35 @@ import {
 } from "./StyledComponents/StyledComponent";
 import { Button, Input, InputProps, TextareaAutosize } from "@mui/base";
 import InputComponent from "./InputComponent";
+import CustomTextField from "./InputComponent";
+import { useForm } from "react-hook-form";
 
 const FormComponent = ({ generateResponse }: any) => {
-
   const [newQuestion, setNewQuestion] = useState<string>("");
-  
+  const { register, handleSubmit } = useForm();
+
   const btnChangeHandler = (e: any) => {
     generateResponse(newQuestion, setNewQuestion);
-    console.log(newQuestion)
+    console.log(newQuestion);
   };
 
   return (
     <>
       <FormControl>
-        <InputComponent
-          placeholder="Întreaba orice..."
-          value={newQuestion}
-          onChange={(e: any) => setNewQuestion(e.target.value)}
-        />
-        {/* <textarea
+        {/* <InputComponent test={newQuestion}/> */}
+        {/* <CustomTextField
+          control={control}
+          name="description"
+          label="Description"
+          type="text"
+          variant="outlined"
+        /> */}
+        <textarea
           rows={5}
           placeholder="Întreaba orice..."
           value={newQuestion}
           onChange={(e) => setNewQuestion(e.target.value)}
-        ></textarea> */}
+        ></textarea>
       </FormControl>
       <BTN onClick={btnChangeHandler}>Trimite</BTN>
     </>

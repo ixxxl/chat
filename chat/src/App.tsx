@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormComponent from "./components/FormComponent";
 import AnswerComponent from "./components/AnswerComponent";
 import { Configuration, OpenAIApi } from "openai";
-import { Header } from "./components/StyledComponents/StyledComponent";
+import { BTN, Header } from "./components/StyledComponents/StyledComponent";
 import GlobalStyleComponent from "./components/StyledComponents/GlobalStyleComponent";
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
   const generateResponse = async (newQuestion: any, setNewQuestion: any) => {
     let options = {
       model: "text-davinci-003",
+      // model:'gpt-4-0314',
       temperature: 0,
       max_tokens: 100,
       top_p: 1,
@@ -31,6 +32,12 @@ function App() {
       ...options,
       prompt: newQuestion,
     };
+
+    // const completion = await openai.createChatCompletion({
+    //   model: "gpt-3.5-turbo",
+    //   messages: [{role: "user", content: "Hello world"}],
+    // });
+    // console.log(completion.data.choices[0].message);
 
     const response = await openai.createCompletion(completeOptions);
     console.log("Response data=====" + response.data.choices[0].text);
