@@ -64,7 +64,7 @@ export const AnswerSection = styled.section`
 `;
 
 export const AnswerSectionQuestion = styled.section`
-  background-color: #ca228c;
+  background-color: #40c1ac;
   padding: 20px;
 `;
 
