@@ -65,7 +65,7 @@ function App() {
           wrapperStyle={{}}
           wrapperClass="comment-wrapper"
           color="#fff"
-          backgroundColor="#F4442E"
+          backgroundColor="rgb(64, 193, 172)"
         />
       )}
       <AnswerComponent storedValues={storedValues} />
