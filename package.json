@@ -4,6 +4,7 @@
     "@mui/system": "^5.12.1",
     "dotenv": "^16.0.3",
     "openai": "^3.2.1",
+    "react-loader-spinner": "^5.3.4",
     "yup": "^1.1.1"
   }
 }

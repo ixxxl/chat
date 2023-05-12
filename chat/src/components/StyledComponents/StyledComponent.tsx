@@ -1,3 +1,4 @@
+import ContentCopy from "@mui/icons-material/ContentCopy";
 import styled from "styled-components";
 
 export const Header = styled.section`
@@ -34,7 +35,7 @@ export const FormControl = styled.form`
   font-size: 1rem;
   font-family: "Poppins", sans-serif;
   outline: none;
-  background-color: #343536;
+  background-color: #cfcfcf;
   color: #dadadb;
   transition: all 0.5s ease-in-out;
 `;
@@ -93,7 +94,6 @@ export const IconHover = styled.i`
   background-color: #ca228c;
 `;
 
-
 //   .header-section {
 //     margin: 30px 0;
 //     text-align: center;
@@ -143,3 +143,30 @@ export const IconHover = styled.i`
 //     border-top-right-radius: 0%;
 //   }
 
+export const StyledCopyIcon = styled(
+  ContentCopy
+)` color: #4f8fff;  font-size: 1.3em; transition: color 0.3s ease; &:hover { color: #8ac9ff;`;
+
+export const ButtonS = styled.button`
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #4b47fb;
+  }
+  &:active {
+    background-color: #3a36e3;
+  }
+  &:focus {
+    outline: none;
+  }
+`;

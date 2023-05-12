@@ -8,10 +8,12 @@ import {
 } from "openai";
 import { Header } from "./components/StyledComponents/StyledComponent";
 import GlobalStyleComponent from "./components/StyledComponents/GlobalStyleComponent";
-import { ChatGpt } from "./components/StyledComponents/chatGPt";
+
+import { Comment } from "react-loader-spinner";
 
 function App() {
   const [storedValues, setStoredValues] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const configuration = new Configuration({
     organization: process.env.REACT_APP_API_ORGANIZATION,
@@ -22,6 +24,7 @@ function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateResponse = async (newQuestion: any, setNewQuestion: any) => {
+    setIsLoading(true);
     const chatGptMessages = [
       {
         role: ChatCompletionRequestMessageRoleEnum.User,
@@ -32,6 +35,7 @@ function App() {
       messages: chatGptMessages,
       model: "gpt-4",
     });
+
     if (response.data.choices) {
       setStoredValues([
         {
@@ -40,6 +44,7 @@ function App() {
         },
         ...storedValues,
       ]);
+      setIsLoading(false);
       setNewQuestion("");
     }
   };
@@ -51,6 +56,18 @@ function App() {
         <p>Internal chat</p>
       </Header>
       <FormComponent generateResponse={generateResponse} />
+      {isLoading && (
+        <Comment
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="comment-loading"
+          wrapperStyle={{}}
+          wrapperClass="comment-wrapper"
+          color="#fff"
+          backgroundColor="#F4442E"
+        />
+      )}
       <AnswerComponent storedValues={storedValues} />
       {/* <ChatGpt /> */}
     </div>
