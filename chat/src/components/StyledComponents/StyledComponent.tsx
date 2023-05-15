@@ -32,7 +32,7 @@ export const TextArea = styled.textarea`
 export const FormControl = styled.form`
   margin-bottom: 20px;
   padding: 20px;
-  font-size: 1rem;
+ // font-size: 1rem;
   font-family: "Poppins", sans-serif;
   outline: none;
   background-color: #cfcfcf;
@@ -45,10 +45,35 @@ export const HrLine = styled.hr`
   border: 1px solid #343536;
 `;
 
-export const AnswerContainer = styled.section`
-  overflow: scroll;
-  max-height: 500px;
+export const AnswerContainer = styled.div`
+  // overflow: scroll;
+  // max-height: 500px;
+  fullwidth: 300px;
+  height: 500px;
+  overflow-y: scroll;
+  padding: 1rem;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  // Customize scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #9e9e9e;
+    border-radius: 5px;
+
+    &:hover {
+      background: #777;
+    }
+  }
 `;
+
 export const AnswerSection = styled.section`
   margin: 30px 0;
   position: relative;

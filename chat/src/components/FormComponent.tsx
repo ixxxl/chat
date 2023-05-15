@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import {
-  ButtonS,
-  FormControl,
-  FormSection,
-  TextArea,
-} from "./StyledComponents/StyledComponent";
+import { ButtonS, FormControl } from "./StyledComponents/StyledComponent";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const FormComponent = ({ generateResponse }: any) => {
   const [newQuestion, setNewQuestion] = useState<string>("");
 
   const { control, handleSubmit } = useForm();
+
+  const client = useQueryClient();
 
   // const btnChangeHandler = (e: any) => {
   //   generateResponse(newQuestion, setNewQuestion);
@@ -20,37 +18,35 @@ const FormComponent = ({ generateResponse }: any) => {
 
   const clickHandler = (data: any) => {
     generateResponse(newQuestion, setNewQuestion);
-
     console.log(newQuestion);
   };
 
   return (
     <>
       <FormControl>
-        <form>
-          <Controller
-            control={control}
-            name="Input"
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { invalid, isTouched, isDirty, error },
-              formState,
-            }) => (
-              <TextField
-                fullWidth
-                placeholder="Întreabă orice"
-                rows={3}
-                multiline
-                onBlur={onBlur} // notify when input is touched
-                onChange={(event) => {
-                  setNewQuestion(event.target.value);
-                }} // send value to hook form
-                value={newQuestion}
-                inputRef={ref}
-              />
-            )}
-          />
-        </form>
+        <Controller
+          control={control}
+          name="Input"
+          render={({
+            field: { onChange, onBlur, value, name, ref },
+            fieldState: { invalid, isTouched, isDirty, error },
+            formState,
+          }) => (
+            <TextField
+              fullWidth
+              placeholder="Întreabă orice"
+              rows={3}
+              multiline
+              onBlur={onBlur} // notify when input is touched
+              onChange={(event) => {
+                setNewQuestion(event.target.value);
+              }} // send value to hook form
+              value={newQuestion}
+              inputRef={ref}
+            />
+          )}
+        />
+
         {/* <textarea
           rows={5}
           placeholder="Întreaba orice..."

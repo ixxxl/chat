@@ -10,10 +10,11 @@ import { Header } from "./components/StyledComponents/StyledComponent";
 import GlobalStyleComponent from "./components/StyledComponents/GlobalStyleComponent";
 
 import { Comment } from "react-loader-spinner";
+import { useQuery } from "@tanstack/react-query";
 
 function App() {
   const [storedValues, setStoredValues] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading1, setIsLoading] = useState<boolean>(false);
 
   const configuration = new Configuration({
     organization: process.env.REACT_APP_API_ORGANIZATION,
@@ -25,12 +26,14 @@ function App() {
 
   const generateResponse = async (newQuestion: any, setNewQuestion: any) => {
     setIsLoading(true);
+
     const chatGptMessages = [
       {
         role: ChatCompletionRequestMessageRoleEnum.User,
         content: !!newQuestion ? newQuestion : "",
       },
     ];
+
     const response = await openai.createChatCompletion({
       messages: chatGptMessages,
       model: "gpt-4",
@@ -48,6 +51,14 @@ function App() {
       setNewQuestion("");
     }
   };
+
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => generateResponse,
+  });
+
+  console.log(data);
+
   return (
     <div>
       <Header>
@@ -68,6 +79,7 @@ function App() {
           backgroundColor="rgb(64, 193, 172)"
         />
       )}
+
       <AnswerComponent storedValues={storedValues} />
       {/* <ChatGpt /> */}
     </div>
