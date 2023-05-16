@@ -32,7 +32,7 @@ export const TextArea = styled.textarea`
 export const FormControl = styled.form`
   margin-bottom: 20px;
   padding: 20px;
- // font-size: 1rem;
+  // font-size: 1rem;
   font-family: "Poppins", sans-serif;
   outline: none;
   background-color: #cfcfcf;

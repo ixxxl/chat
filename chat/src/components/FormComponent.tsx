@@ -2,22 +2,29 @@ import React, { useState } from "react";
 import { ButtonS, FormControl } from "./StyledComponents/StyledComponent";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { generateResponse1 } from "../services/ApiServices";
+import { useQuery } from "react-query";
 
 const FormComponent = ({ generateResponse }: any) => {
   const [newQuestion, setNewQuestion] = useState<string>("");
 
   const { control, handleSubmit } = useForm();
 
-  const client = useQueryClient();
-
   // const btnChangeHandler = (e: any) => {
   //   generateResponse(newQuestion, setNewQuestion);
   //   console.log(newQuestion);
   // };
 
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ["questions"],
+    queryFn: () => generateResponse1(newQuestion, setNewQuestion),
+  });
+  if (isSuccess) {
+    console.log("Success Data: ", data);
+  }
+
   const clickHandler = (data: any) => {
-    generateResponse(newQuestion, setNewQuestion);
+    generateResponse1(newQuestion, setNewQuestion);
     console.log(newQuestion);
   };
 
