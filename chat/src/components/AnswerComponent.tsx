@@ -15,17 +15,18 @@ const AnswerComponent = ({ storedValues }: any) => {
     <>
       <HrLine />
       <AnswerContainer>
-        {storedValues.map((value: any, index: number) => {
-          return (
-            <AnswerSection key={index}>
-              <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
-              <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
-              <StyledCopyIcon
-                onClick={() => copyText(value.answer)}
-              ></StyledCopyIcon>
-            </AnswerSection>
-          );
-        })}
+        {storedValues &&
+          storedValues.map((value: any, index: number) => {
+            return (
+              <AnswerSection key={index}>
+                <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
+                <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
+                <StyledCopyIcon
+                  onClick={() => copyText(value.answer)}
+                ></StyledCopyIcon>
+              </AnswerSection>
+            );
+          })}
       </AnswerContainer>
     </>
   );

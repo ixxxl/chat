@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonS, FormControl } from "./StyledComponents/StyledComponent";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
-import { generateResponse1 } from "../services/ApiServices";
 import { useQuery } from "react-query";
+import AnswerComponent from "./AnswerComponent";
+import { Comment } from "react-loader-spinner";
 
 const FormComponent = ({ generateResponse }: any) => {
   const [newQuestion, setNewQuestion] = useState<string>("");
-
+  const [storedValues, setStoredValues] = useState<any>([]);
   const { control, handleSubmit } = useForm();
 
   // const btnChangeHandler = (e: any) => {
@@ -15,17 +16,21 @@ const FormComponent = ({ generateResponse }: any) => {
   //   console.log(newQuestion);
   // };
 
-  const { data, isLoading, isError, isSuccess } = useQuery({
+  const { data, isLoading, isError, isSuccess, refetch } = useQuery({
     queryKey: ["questions"],
-    queryFn: () => generateResponse1(newQuestion, setNewQuestion),
+    queryFn: () => generateResponse(newQuestion, setNewQuestion),
+    enabled: false,
   });
-  if (isSuccess) {
-    console.log("Success Data: ", data);
-  }
+
+  useEffect(() => {
+    if (data) {
+      console.log("Success Data: ", data);
+      setStoredValues([data, ...storedValues]);
+    }
+  }, [data]);
 
   const clickHandler = (data: any) => {
-    generateResponse1(newQuestion, setNewQuestion);
-    console.log(newQuestion);
+    refetch();
   };
 
   return (
@@ -64,6 +69,19 @@ const FormComponent = ({ generateResponse }: any) => {
 
       <ButtonS onClick={handleSubmit(clickHandler)}>Send</ButtonS>
       {/* <BTN onClick={btnChangeHandler}>Trimite</BTN> */}
+      <AnswerComponent storedValues={storedValues} />
+      {isLoading && (
+          <Comment
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="comment-loading"
+            wrapperStyle={{}}
+            wrapperClass="comment-wrapper"
+            color="#fff"
+            backgroundColor="rgb(64, 193, 172)"
+          />
+        )}
     </>
   );
 };

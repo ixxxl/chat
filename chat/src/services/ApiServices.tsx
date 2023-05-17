@@ -27,9 +27,11 @@ export const generateResponse1 = async (
     messages: chatGptMessages,
     model: "gpt-4",
   });
-  
+
   if (response.data.choices) {
-    console.log(response.data.choices);
-  
-    }
+    return {
+      question: newQuestion,
+      answer: response.data.choices[0].message?.content,
+    };
+  }
 };

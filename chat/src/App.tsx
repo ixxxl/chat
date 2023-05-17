@@ -77,7 +77,7 @@ function App() {
           />
         )}
 
-        <AnswerComponent storedValues={storedValues} />
+      
         {/* <ChatGpt /> */}
       </QueryClientProvider>
     </div>
