@@ -10,12 +10,12 @@ const FormComponent = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const { questions, requestAnswer, isLoading } = useQuestions();
+  const { questions, requestAnswer, isLoading, isError } = useQuestions();
 
   const clickHandler = () => {
     requestAnswer(newQuestion);
   };
-  console.log(isLoading);
+
   return (
     <>
       <FormControl>
@@ -45,9 +45,11 @@ const FormComponent = () => {
       <ButtonS onClick={handleSubmit(clickHandler)} disabled={isLoading}>
         Send
       </ButtonS>
-      {!isLoading && (
-        <AnswerComponent isLoading={isLoading} questions={questions} />
-      )}
+      <AnswerComponent
+        isLoading={isLoading}
+        questions={questions}
+        isError={isError}
+      />
     </>
   );
 };

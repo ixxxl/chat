@@ -8,11 +8,11 @@ import {
   StyledCopyIcon,
 } from "./StyledComponents/StyledComponent";
 
-const AnswerComponent = ({ questions, isLoading }: any) => {
+const AnswerComponent = ({ questions, isLoading, isError }: any) => {
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
   };
-  console.log('1');
+
   return (
     <>
       <HrLine />
@@ -32,6 +32,7 @@ const AnswerComponent = ({ questions, isLoading }: any) => {
         {questions.map((value: any, index: number) => {
           return (
             <AnswerSection key={index}>
+              {isError && <pre>{isError}</pre>}
               <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
               <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
               <StyledCopyIcon

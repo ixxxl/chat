@@ -6,7 +6,7 @@ export const useQuestions = () => {
   const [newQuestion, setNewQuestion] = useState<string>("");
   const [questions, setQuestions] = useState<any[]>([]);
 
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["questions", newQuestion],
     queryFn: () => generateResponse(newQuestion),
     enabled: newQuestion.length > 0,
@@ -26,5 +26,6 @@ export const useQuestions = () => {
     questions,
     requestAnswer,
     isLoading,
+    isError,
   };
 };
