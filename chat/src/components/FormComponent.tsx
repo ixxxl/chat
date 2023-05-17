@@ -1,38 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ButtonS, FormControl } from "./StyledComponents/StyledComponent";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
-import { useQuery } from "react-query";
 import AnswerComponent from "./AnswerComponent";
-import { Comment } from "react-loader-spinner";
+import { useQuestions } from "../hooks/useQuestions";
 
-const FormComponent = ({ generateResponse }: any) => {
+const FormComponent = () => {
   const [newQuestion, setNewQuestion] = useState<string>("");
-  const [storedValues, setStoredValues] = useState<any>([]);
+
   const { control, handleSubmit } = useForm();
 
-  // const btnChangeHandler = (e: any) => {
-  //   generateResponse(newQuestion, setNewQuestion);
-  //   console.log(newQuestion);
-  // };
+  const { questions, requestAnswer, isLoading } = useQuestions();
 
-  const { data, isLoading, isError, isSuccess, refetch } = useQuery({
-    queryKey: ["questions"],
-    queryFn: () => generateResponse(newQuestion, setNewQuestion),
-    enabled: false,
-  });
-
-  useEffect(() => {
-    if (data) {
-      console.log("Success Data: ", data);
-      setStoredValues([data, ...storedValues]);
-    }
-  }, [data]);
-
-  const clickHandler = (data: any) => {
-    refetch();
+  const clickHandler = () => {
+    requestAnswer(newQuestion);
   };
-
+  console.log(isLoading);
   return (
     <>
       <FormControl>
@@ -58,30 +41,13 @@ const FormComponent = ({ generateResponse }: any) => {
             />
           )}
         />
-
-        {/* <textarea
-          rows={5}
-          placeholder="Întreaba orice..."
-          value={newQuestion}
-          onChange={(e) => setNewQuestion(e.target.value)}
-        ></textarea> */}
       </FormControl>
-
-      <ButtonS onClick={handleSubmit(clickHandler)}>Send</ButtonS>
-      {/* <BTN onClick={btnChangeHandler}>Trimite</BTN> */}
-      <AnswerComponent storedValues={storedValues} />
-      {isLoading && (
-          <Comment
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="comment-loading"
-            wrapperStyle={{}}
-            wrapperClass="comment-wrapper"
-            color="#fff"
-            backgroundColor="rgb(64, 193, 172)"
-          />
-        )}
+      <ButtonS onClick={handleSubmit(clickHandler)} disabled={isLoading}>
+        Send
+      </ButtonS>
+      {!isLoading && (
+        <AnswerComponent isLoading={isLoading} questions={questions} />
+      )}
     </>
   );
 };

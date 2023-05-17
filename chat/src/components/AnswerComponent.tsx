@@ -1,3 +1,4 @@
+import { Comment } from "react-loader-spinner";
 import {
   AnswerContainer,
   AnswerSection,
@@ -7,26 +8,38 @@ import {
   StyledCopyIcon,
 } from "./StyledComponents/StyledComponent";
 
-const AnswerComponent = ({ storedValues }: any) => {
+const AnswerComponent = ({ questions, isLoading }: any) => {
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
   };
+  console.log('1');
   return (
     <>
       <HrLine />
       <AnswerContainer>
-        {storedValues &&
-          storedValues.map((value: any, index: number) => {
-            return (
-              <AnswerSection key={index}>
-                <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
-                <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
-                <StyledCopyIcon
-                  onClick={() => copyText(value.answer)}
-                ></StyledCopyIcon>
-              </AnswerSection>
-            );
-          })}
+        {isLoading && (
+          <Comment
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="comment-loading"
+            wrapperStyle={{}}
+            wrapperClass="comment-wrapper"
+            color="#fff"
+            backgroundColor="rgb(64, 193, 172)"
+          />
+        )}
+        {questions.map((value: any, index: number) => {
+          return (
+            <AnswerSection key={index}>
+              <AnswerSectionQuestion>{value.question}</AnswerSectionQuestion>
+              <AnswerSectionAnswer>{value.answer}</AnswerSectionAnswer>
+              <StyledCopyIcon
+                onClick={() => copyText(value.answer)}
+              ></StyledCopyIcon>
+            </AnswerSection>
+          );
+        })}
       </AnswerContainer>
     </>
   );

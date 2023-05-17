@@ -12,10 +12,7 @@ const configuration = new Configuration({
 delete configuration.baseOptions.headers["User-Agent"];
 const openai = new OpenAIApi(configuration);
 
-export const generateResponse1 = async (
-  newQuestion: any,
-  setNewQuestion: any
-) => {
+export const generateResponse = async (newQuestion: any) => {
   const chatGptMessages = [
     {
       role: ChatCompletionRequestMessageRoleEnum.User,
