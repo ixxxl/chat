@@ -5,8 +5,8 @@ import {
   useForm,
   useFormState,
 } from "react-hook-form";
-import { ButtonS } from "../../components/StyledComponents/StyledComponent";
-import { AuthForm, AuthFormSubtitle, AuthForm__Form } from "../styledAuthForm";
+import { ButtonS } from "../ChartPage/StyledComponent";
+import { AuthForm, AuthFormSubtitle, AuthForm__Form } from "./styledAuthForm";
 
 interface IFieldsAuth {
   login?: string;
@@ -20,10 +20,7 @@ const LoginFormComponent = (props: IFieldsAuth) => {
 
   const { errors } = useFormState({ control });
 
-  const onSubmit: SubmitHandler<IFieldsAuth> = (data) => {
-    let currentUser: string;
-    let currentUserPassword: string;
-  };
+  const onSubmit: SubmitHandler<IFieldsAuth> = (data) => {};
 
   return (
     <AuthForm>

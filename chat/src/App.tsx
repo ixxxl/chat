@@ -1,9 +1,10 @@
-import FormComponent from "./components/FormComponent";
-import { Header } from "./components/StyledComponents/StyledComponent";
-import GlobalStyleComponent from "./components/StyledComponents/GlobalStyleComponent";
+import FormComponent from "./pages/ChartPage/FormComponent";
+import { Header } from "./pages/ChartPage/StyledComponent";
+import GlobalStyleComponent from "./pages/ChartPage/GlobalStyleComponent";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useQuestions } from "./hooks/useQuestions";
-import LoginFormComponent from "./pag/AuthPage/AuthPage";
+import LoginFormComponent from "./pages/AuthPage/AuthPage";
+
 
 function App() {
   const queryClient = new QueryClient();

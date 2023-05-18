@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { ButtonS, FormControl } from "./StyledComponents/StyledComponent";
+import { ButtonS, FormControl } from "./StyledComponent";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+
+import { useQuestions } from "../../hooks/useQuestions";
 import AnswerComponent from "./AnswerComponent";
-import { useQuestions } from "../hooks/useQuestions";
 
 const FormComponent = () => {
   const [newQuestion, setNewQuestion] = useState<string>("");

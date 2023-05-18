@@ -6,7 +6,7 @@ import {
   AnswerSectionQuestion,
   HrLine,
   StyledCopyIcon,
-} from "./StyledComponents/StyledComponent";
+} from "./StyledComponent";
 
 const AnswerComponent = ({ questions, isLoading, isError }: any) => {
   const copyText = (text: string) => {
